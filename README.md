@@ -10,6 +10,11 @@ React + Vite scaffold configured for deployment to GitHub Pages.
 - **gh-pages** — one-command deploy to GitHub Pages
 - **ESLint + Prettier** — linting & formatting
 
+## 🚀 Live Demo
+
+Experience the interactive Dhyuthi 7.0 website and its TRIONN-inspired motion design here:  
+👉 [**Try it Live!**](https://sreedharrajkannal.github.io/Website-for-DYUTHI7.0/)
+
 ## Folder Structure
 
 ```
