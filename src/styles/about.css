@@ -177,15 +177,16 @@
   font-family: var(--font-display);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
-  color: var(--color-primary-400);
+  color: var(--accent-gold);
   text-decoration: none;
   letter-spacing: var(--tracking-wide);
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--ease-out), text-shadow var(--duration-fast) var(--ease-out);
   margin-top: var(--space-2);
 }
 
 .pre-event-card__register:hover {
-  color: var(--color-primary-300);
+  color: #fff1c5; /* Lighter gold on hover */
+  text-shadow: 0 0 10px rgba(214, 179, 106, 0.4);
 }
 
 .pre-event-card__register::after {

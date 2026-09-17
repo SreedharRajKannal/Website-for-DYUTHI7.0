@@ -174,8 +174,8 @@
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--text-inverse);
-  background: var(--gradient-hero);
+  color: var(--bg-main);
+  background: var(--accent-gold);
   background-size: 200% 200%;
   border: none;
   border-radius: var(--radius-full);
@@ -216,8 +216,7 @@
 
 .hero__cta:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 0 30px rgba(0, 212, 212, 0.3),
-              0 0 60px rgba(255, 184, 30, 0.15);
+  box-shadow: var(--glow-gold);
 }
 
 .hero__cta:active {

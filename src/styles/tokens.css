@@ -3,99 +3,64 @@
  *  DHYUTHI 7.0 — DESIGN TOKENS
  * ═══════════════════════════════════════════════════════════════════════
  *
- *  THEME: "Neon Pulse" — Electric Cyan + Neon Green on Deep Obsidian
+ *  THEME: Obsidian + Champagne Gold + Electric Cyan
  *
- *  RATIONALE:
- *  Inspired by TRIONN design aesthetics, this palette embraces a premium,
- *  hyper-modern feel. Deep obsidian (#07090E) provides an ultra-dark canvas
- *  that makes the electric cyan (#00B5E2) pop intensely. Neon Green (#39FF14)
- *  is used as the striking accent.
- *
- *  The near-black background gives surfaces depth. Text uses high contrast
- *  light gray/white to maintain WCAG AA compliance.
- *
- *  The near-black background (--bg-base: #0A0E13) sits cooler than pure
- *  black, giving surfaces depth without crushing contrast. Surface
- *  elevation uses subtle blue-tinted grays so cards and panels "float"
- *  on the dark canvas.
- *
- *  Font pairing:
- *    Headings — "Space Grotesk": geometric, techy, authoritative
- *    Body     — "Inter": neutral, highly legible, large x-height
- *
- *  All color tokens pass WCAG AA on their intended background.
  * ═══════════════════════════════════════════════════════════════════════
  */
 
 :root {
-  /* ─── COLOR PALETTE ─────────────────────────────────────────────── */
+  /* ─── COLOR PALETTE (Requested Hex Codes) ───────────────────────── */
+  
+  --bg-main: #05070A;       /* Obsidian */
+  --bg-secondary: #0B0F14;  /* Graphite */
+  --card-bg: #111820;       /* Dark Slate */
+  --card-hover: #17212B;
+  
+  --text-primary: #F4F1EA;  /* Ivory - Headings */
+  --text-secondary: #929CAA; /* Cool Gray - Body */
+  --text-muted: #596471;
+  
+  --accent-gold: #D6B36A;   /* Champagne Gold */
+  --accent-cyan: #00C8E8;   /* Electric Cyan */
+  
+  --border-color: #252D36;
 
-  /* Primary — Electric Cyan */
-  --color-primary-50:  #e0f8ff;
-  --color-primary-100: #b3ecff;
-  --color-primary-200: #80e0ff;
-  --color-primary-300: #4dd4ff;
-  --color-primary-400: #1ac8ff;
-  --color-primary-500: #00B5E2;  /* Main primary - Cyan */
-  --color-primary-600: #0091b5;
-  --color-primary-700: #006c88;
-  --color-primary-800: #00485a;
-  --color-primary-900: #00242d;
+  /* ─── SEMANTIC ALIASES FOR COMPATIBILITY ────────────────────────── */
+  
+  /* Primary / Secondary / Accent mapped to new palette */
+  --color-primary-300: #8ae4f2;
+  --color-primary-400: #42d7f0;
+  --color-primary-500: var(--accent-cyan);
+  --color-primary-600: #009eb8;
+  --color-primary-700: #00778a;
 
-  /* Secondary — Cool Slate */
-  --color-secondary-50:  #f0f4f8;
-  --color-secondary-100: #d9e2ec;
-  --color-secondary-200: #bcccdc;
-  --color-secondary-300: #9fb3c8;
-  --color-secondary-400: #829ab1;
-  --color-secondary-500: #627D98;  /* Main secondary */
-  --color-secondary-600: #486581;
-  --color-secondary-700: #334e68;
-  --color-secondary-800: #243b53;
-  --color-secondary-900: #102a43;
+  --color-accent-300: #e3c994;
+  --color-accent-400: #dec184;
+  --color-accent-500: var(--accent-gold);
+  --color-accent-600: #b59556;
+  --color-accent-700: #917743;
 
-  /* Accent — Luminous Neon Green */
-  --color-accent-50:  #ebffe7;
-  --color-accent-100: #ccffc2;
-  --color-accent-200: #a3ff91;
-  --color-accent-300: #7aff5e;
-  --color-accent-400: #52ff2b;
-  --color-accent-500: #39FF14;  /* Main accent */
-  --color-accent-600: #2bcc10;
-  --color-accent-700: #1f990c;
-  --color-accent-800: #126607;
-  --color-accent-900: #093303;
+  --color-secondary-400: var(--text-secondary);
+  --color-secondary-500: var(--text-muted);
 
   /* Backgrounds */
-  --bg-base:     #07090e;   /* Deep obsidian */
-  --bg-surface:  #0d111a;   /* Elevated surface */
-  --bg-elevated: #131926;   /* Higher elevation */
-  --bg-overlay:  rgba(7, 9, 14, 0.85);  /* Overlay / scrim */
-
-  /* Text */
-  --text-primary:   #F8FAFC;   /* High-emphasis text (passes WCAG AA on obsidian) */
-  --text-secondary: #94A3B8;   /* Medium-emphasis text (passes WCAG AA on obsidian) */
-  --text-muted:     #64748B;   /* Low-emphasis / disabled text */
-  --text-inverse:   #07090e;   /* Text on light/colored backgrounds */
+  --bg-base:     var(--bg-main);
+  --bg-surface:  var(--card-bg);
+  --bg-elevated: var(--bg-secondary);
+  --bg-overlay:  rgba(5, 7, 10, 0.85);
+  --bg-default:  var(--bg-main);
 
   /* Borders */
-  --border-subtle:  rgba(160, 174, 192, 0.12);  /* Faint separation */
-  --border-default: rgba(160, 174, 192, 0.24);  /* Default border */
-  --border-strong:  rgba(160, 174, 192, 0.40);  /* Prominent border */
-
-  /* Semantic */
-  --color-success: #34D399;   /* Emerald green */
-  --color-warning: #FBBF24;   /* Amber warning */
-  --color-error:   #F87171;   /* Soft red */
-  --color-info:    #60A5FA;   /* Sky blue */
+  --border-subtle:  var(--border-color);
+  --border-default: var(--border-color);
+  --border-strong:  var(--text-muted);
 
   /* Gradients */
-  --gradient-primary:    linear-gradient(135deg, var(--color-primary-500), var(--color-primary-300));
-  --gradient-secondary:  linear-gradient(135deg, var(--color-secondary-500), var(--color-secondary-300));
-  --gradient-accent:     linear-gradient(135deg, var(--color-accent-500), var(--color-primary-500));
-  --gradient-hero:       linear-gradient(160deg, var(--color-primary-500) 0%, var(--color-accent-500) 100%);
-  --gradient-glow-teal:  radial-gradient(ellipse at center, rgba(0, 181, 226, 0.15) 0%, transparent 70%);
-  --gradient-glow-amber: radial-gradient(ellipse at center, rgba(57, 255, 20, 0.12) 0%, transparent 70%);
+  --gradient-primary:    linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  --gradient-secondary:  linear-gradient(135deg, var(--bg-secondary), var(--card-bg));
+  --gradient-hero:       linear-gradient(160deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
+  --gradient-glow-cyan:  radial-gradient(ellipse at center, rgba(0, 200, 232, 0.15) 0%, transparent 70%);
+  --gradient-glow-gold:  radial-gradient(ellipse at center, rgba(214, 179, 106, 0.12) 0%, transparent 70%);
 
   /* ─── TYPOGRAPHY ────────────────────────────────────────────────── */
 
@@ -172,12 +137,10 @@
                 0 8px  10px rgba(0, 0, 0, 0.25);
 
   /* Glow shadows (for hover / focus states) */
-  --glow-primary:   0 0 20px rgba(0, 181, 226, 0.3),
-                    0 0 60px rgba(0, 181, 226, 0.1);
-  --glow-secondary: 0 0 20px rgba(98, 125, 152, 0.3),
-                    0 0 60px rgba(98, 125, 152, 0.1);
-  --glow-accent:    0 0 20px rgba(57, 255, 20, 0.3),
-                    0 0 60px rgba(57, 255, 20, 0.1);
+  --glow-primary:   0 0 20px rgba(0, 200, 232, 0.3),
+                    0 0 60px rgba(0, 200, 232, 0.1);
+  --glow-gold:      0 0 20px rgba(214, 179, 106, 0.3),
+                    0 0 60px rgba(214, 179, 106, 0.1);
 
   /* ─── TRANSITIONS ───────────────────────────────────────────────── */
 
