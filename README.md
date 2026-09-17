@@ -67,7 +67,3 @@ This will:
 ### First-time setup
 
 Make sure the GitHub repo's **Settings → Pages** source is set to the `gh-pages` branch.
-
-## License
-
-MIT
