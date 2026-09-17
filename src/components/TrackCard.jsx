@@ -96,7 +96,11 @@ function TrackCard({ track, index }) {
         <div className="track-card__inner" ref={innerRef}>
           <div className="track-card__poster">
             <span className="track-card__number">Track {track.number}</span>
-            <span className="track-card__poster-label">Poster coming soon</span>
+            {track.image ? (
+              <img src={track.image} alt={track.title} className="card-image" />
+            ) : (
+              <span className="track-card__poster-label">Poster coming soon</span>
+            )}
           </div>
 
           <div className="track-card__body">

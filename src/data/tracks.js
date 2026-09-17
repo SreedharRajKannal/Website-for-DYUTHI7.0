@@ -5,6 +5,11 @@
  * ───────────────────────────────────────────────────────────────────
  */
 
+import imgNexus from '../assets/tracks/nexus.png'
+import imgSynapse from '../assets/tracks/synapse.png'
+import imgCipher from '../assets/tracks/cipher.png'
+import imgVolt from '../assets/tracks/volt.png'
+
 const tracks = [
   {
     id: 'track-01',
@@ -21,6 +26,7 @@ const tracks = [
     ],
     eligibility: 'Open to all undergraduate and postgraduate students with a valid college ID.',
     prizes: '₹ XX,XXX (1st) · ₹ XX,XXX (2nd) · ₹ X,XXX (3rd)',
+    image: imgNexus,
   },
   {
     id: 'track-02',
@@ -37,6 +43,7 @@ const tracks = [
     ],
     eligibility: 'Open to all college students. Cross-college teams welcome.',
     prizes: '₹ XX,XXX (1st) · ₹ XX,XXX (2nd) · ₹ X,XXX (3rd) + sponsor goodies',
+    image: imgSynapse,
   },
   {
     id: 'track-03',
@@ -53,6 +60,7 @@ const tracks = [
     ],
     eligibility: 'Open to all students. No prior CTF experience required.',
     prizes: '₹ XX,XXX (1st) · ₹ XX,XXX (2nd) · ₹ X,XXX (3rd)',
+    image: imgCipher,
   },
   {
     id: 'track-04',
@@ -69,6 +77,7 @@ const tracks = [
     ],
     eligibility: 'Open to all college students with basic electronics knowledge.',
     prizes: '₹ XX,XXX (1st) · ₹ XX,XXX (2nd) · ₹ X,XXX (3rd) + component kits',
+    image: imgVolt,
   },
 ]
 

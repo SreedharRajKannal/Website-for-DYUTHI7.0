@@ -72,7 +72,7 @@ a:focus-visible {
 /* ─── Selection ─────────────────────────────────────────────────────── */
 
 ::selection {
-  background-color: rgba(0, 212, 212, 0.25);
+  background-color: rgba(200, 203, 208, 0.25);
   color: var(--text-primary);
 }
 
@@ -120,5 +120,19 @@ a:focus-visible {
 .reveal--visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* --- Card Images ------------------------------------------------------- */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.track-card:hover .card-image,
+.pre-event-card:hover .card-image {
+  transform: scale(1.05);
 }
 

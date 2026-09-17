@@ -4,6 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { useSEO } from '../hooks/useSEO'
 import logo from '../assets/dhyuthi-logo.png'
+import imgCodeSprint from '../assets/events/codesprint.png'
+import imgDesignJam from '../assets/events/designjam.png'
+import imgCircuitQuest from '../assets/events/circuitquest.png'
 import '../styles/about.css'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -17,6 +20,7 @@ const PRE_EVENTS = [
     blurb:
       'A fast-paced competitive programming contest open to all skill levels. Tackle algorithmic challenges under time pressure and climb the leaderboard.',
     registerLink: '#',
+    image: imgCodeSprint,
   },
   {
     id: 'pre-2',
@@ -24,6 +28,7 @@ const PRE_EVENTS = [
     blurb:
       'A UI/UX design hackathon where teams craft user-centric solutions in 48 hours. Showcase creativity, prototyping skills, and design thinking.',
     registerLink: '#',
+    image: imgDesignJam,
   },
   {
     id: 'pre-3',
@@ -31,6 +36,7 @@ const PRE_EVENTS = [
     blurb:
       'A hands-on electronics and IoT challenge. Build, debug, and demonstrate working circuits to solve real-world problem statements.',
     registerLink: '#',
+    image: imgCircuitQuest,
   },
 ]
 
@@ -115,9 +121,13 @@ function About() {
               key={event.id}
             >
               <div className="pre-event-card__poster">
-                <span className="pre-event-card__poster-label">
-                  Poster coming soon
-                </span>
+                {event.image ? (
+                  <img src={event.image} alt={event.title} className="card-image" />
+                ) : (
+                  <span className="pre-event-card__poster-label">
+                    Poster coming soon
+                  </span>
+                )}
               </div>
 
               <div className="pre-event-card__body">
