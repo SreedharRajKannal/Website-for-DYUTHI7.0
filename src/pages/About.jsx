@@ -1,8 +1,14 @@
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import Carousel from '../components/Carousel'
 import { useSEO } from '../hooks/useSEO'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import logo from '../assets/dhyuthi-logo.png'
 import '../styles/about.css'
+
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 /* ─── Pre-event placeholder data ────────────────────────────────────── */
 // TODO: Replace with real pre-event details once finalised
@@ -33,7 +39,24 @@ const PRE_EVENTS = [
 function About() {
   useSEO('About', 'Learn more about Dhyuthi 7.0 and its pre-events.')
   const revealIntro = useScrollReveal()
-  const revealEvents = useScrollReveal()
+  const carouselContainerRef = useRef(null)
+
+  useGSAP(() => {
+    gsap.fromTo(carouselContainerRef.current,
+      { scale: 0.95, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: carouselContainerRef.current,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    )
+  }, { scope: carouselContainerRef })
 
   return (
     <div className="about">
@@ -86,7 +109,7 @@ function About() {
       </section>
 
       {/* ── Pre-Events Carousel ────────────────────────────────── */}
-      <section className="about__pre-events reveal" id="pre-events" ref={revealEvents}>
+      <section className="about__pre-events" id="pre-events" ref={carouselContainerRef}>
         <Carousel
           title="Pre-Events"
           subtitle="Warm up before the main fest — open registrations now."

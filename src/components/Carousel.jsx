@@ -1,5 +1,7 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import gsap from 'gsap'
+import '../styles/carousel.css'
 import '../styles/carousel.css'
 
 /**
@@ -47,6 +49,63 @@ function Carousel({ children, title, subtitle, visibleCards = 3 }) {
     setCurrentIndex(Math.max(0, Math.min(idx, maxIndex)))
   }
 
+  /* ── Custom Drag Implementation ── */
+  const isDragging = useRef(false)
+  const startX = useRef(0)
+  const scrollLeftStart = useRef(0)
+  const velocity = useRef(0)
+  const lastTime = useRef(0)
+  const lastX = useRef(0)
+
+  const handlePointerDown = (e) => {
+    if (!trackRef.current) return
+    isDragging.current = true
+    gsap.killTweensOf(trackRef.current) // Stop active inertia
+    startX.current = e.pageX || (e.touches && e.touches[0].pageX)
+    scrollLeftStart.current = trackRef.current.scrollLeft
+    lastX.current = startX.current
+    lastTime.current = performance.now()
+    
+    trackRef.current.style.cursor = 'grabbing'
+    trackRef.current.style.userSelect = 'none'
+  }
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current || !trackRef.current) return
+    e.preventDefault()
+    
+    const x = e.pageX || (e.touches && e.touches[0].pageX)
+    const walk = (x - startX.current) * 1.5 // Drag multiplier
+    
+    trackRef.current.scrollLeft = scrollLeftStart.current - walk
+    
+    // Calculate velocity for inertia
+    const now = performance.now()
+    const dt = now - lastTime.current
+    if (dt > 0) {
+      velocity.current = (x - lastX.current) / dt
+    }
+    lastX.current = x
+    lastTime.current = now
+  }
+
+  const handlePointerUp = () => {
+    if (!isDragging.current || !trackRef.current) return
+    isDragging.current = false
+    trackRef.current.style.cursor = 'grab'
+    trackRef.current.style.userSelect = ''
+
+    // Inertia simulation using GSAP
+    const targetScroll = trackRef.current.scrollLeft - (velocity.current * 200)
+    
+    gsap.to(trackRef.current, {
+      scrollLeft: targetScroll,
+      duration: 0.8,
+      ease: 'power3.out',
+      onComplete: handleScroll // Ensure index updates after throw
+    })
+  }
+
   if (totalSlides === 0) return null
 
   return (
@@ -86,6 +145,10 @@ function Carousel({ children, title, subtitle, visibleCards = 3 }) {
         className="carousel__track"
         ref={trackRef}
         onScroll={handleScroll}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
         style={{
           '--carousel-visible': visibleCards,
         }}

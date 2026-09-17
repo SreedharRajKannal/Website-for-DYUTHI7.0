@@ -34,19 +34,26 @@
 /* ─── Track Card ────────────────────────────────────────────────────── */
 
 .track-card {
+  perspective: 1000px; /* Enable 3D space for child */
+  display: flex;
+  flex-direction: column;
+}
+
+.track-card__inner {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform var(--duration-normal) var(--ease-out),
-              box-shadow var(--duration-normal) var(--ease-out),
+  flex: 1;
+  /* Use transform-style so 3D rotation works properly */
+  transform-style: preserve-3d;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
               border-color var(--duration-normal) var(--ease-out);
 }
 
-.track-card:hover {
-  transform: translateY(-5px);
+.track-card:hover .track-card__inner {
   box-shadow: var(--shadow-lg);
   border-color: var(--border-default);
 }
@@ -191,12 +198,7 @@
   max-height: 85vh;
   overflow-y: auto;
   box-shadow: var(--shadow-xl);
-  animation: modalSlideUp var(--duration-slow) var(--ease-out);
-}
-
-@keyframes modalSlideUp {
-  from { opacity: 0; transform: translateY(24px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  /* Entrance animation is now handled by GSAP */
 }
 
 /* Modal header */

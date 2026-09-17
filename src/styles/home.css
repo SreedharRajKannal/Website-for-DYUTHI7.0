@@ -14,11 +14,11 @@
 
 /* ── Canvas background ──────────────────────────────────────────────── */
 
-.constellation-bg {
+.webgl-bg-wrapper {
   position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* Radial glow overlays for atmosphere */
@@ -61,6 +61,11 @@
   gap: var(--space-6);
   padding: var(--space-8) var(--space-6);
   max-width: 800px;
+  pointer-events: none; /* Let mouse events pass through to WebGL */
+}
+
+.hero__content * {
+  pointer-events: auto; /* Re-enable for text and buttons */
 }
 
 /* Logo */
@@ -69,11 +74,18 @@
   height: auto;
   filter: drop-shadow(0 0 30px rgba(0, 212, 212, 0.2));
   animation: heroLogoFloat 6s ease-in-out infinite;
+  mix-blend-mode: screen; /* Knock out black background from logo */
 }
 
 @keyframes heroLogoFloat {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }
+}
+
+/* GSAP Mask Wrapper for cinematic reveal */
+.hero__title-mask {
+  overflow: hidden;
+  padding-bottom: 4px; /* Prevent clipping descenders if any */
 }
 
 /* Main heading */
@@ -84,9 +96,11 @@
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-tight);
   color: var(--text-primary);
+  opacity: 0; /* Hidden initially for GSAP */
 }
 
 .hero__title span {
+  display: inline-block;
   background: var(--gradient-hero);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -100,6 +114,7 @@
   font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-wide);
   color: var(--text-secondary);
+  opacity: 0; /* Hidden initially for GSAP */
 }
 
 .hero__tagline em {

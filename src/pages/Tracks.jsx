@@ -16,8 +16,8 @@ function Tracks() {
       </p>
 
       <div className="tracks-grid">
-        {tracks.map((track) => (
-          <TrackCard key={track.id} track={track} />
+        {tracks.map((track, i) => (
+          <TrackCard key={track.id} track={track} index={i} />
         ))}
       </div>
     </div>

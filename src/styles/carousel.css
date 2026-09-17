@@ -63,11 +63,15 @@
   display: flex;
   gap: var(--space-6);
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* Changed to auto so GSAP can handle smooth scrolling */
+  scroll-snap-type: none; /* Disable snap so dragging is fluid */
+  padding-bottom: var(--space-4); /* Space for focus rings / shadows */
+  margin: 0 calc(var(--space-6) * -1);
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
+  cursor: grab;
   scrollbar-width: none;          /* Firefox */
   -ms-overflow-style: none;       /* IE */
-  padding-bottom: var(--space-2); /* space for subtle shadow overflow */
 }
 
 .carousel__track::-webkit-scrollbar {
