@@ -1,8 +1,12 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { X, ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { useSEO } from '../hooks/useSEO'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import '../styles/gallery.css'
+
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 /**
  * ─── Gallery Placeholder Data ──────────────────────────────────────
@@ -23,8 +27,51 @@ const GALLERY_IMAGES = [
 
 function Gallery() {
   useSEO('Gallery', 'View memories and photos from past editions of Dhyuthi.')
-  const revealRef = useScrollReveal()
+  const containerRef = useRef(null)
   const [lightboxIndex, setLightboxIndex] = useState(null)
+
+  useGSAP(() => {
+    // 3D Vortex Entrance
+    const items = gsap.utils.toArray('.gallery-item')
+    
+    // Set initial scattered state
+    gsap.set(items, {
+      scale: 0,
+      rotation: () => Math.random() * 360 - 180,
+      x: () => (Math.random() - 0.5) * 1500, // random scatter X
+      y: () => (Math.random() - 0.5) * 1500, // random scatter Y
+      opacity: 0,
+    })
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top bottom-=100',
+        end: 'center center',
+        scrub: 1.5,
+      }
+    })
+
+    // Swirl them into place
+    tl.to(items, {
+      scale: 1,
+      rotation: 0,
+      x: 0,
+      y: 0,
+      opacity: 1,
+      stagger: { amount: 0.5, from: "center" },
+      ease: 'back.out(1.5)',
+    })
+
+    // Pin Gallery at the top for the FAQ curtain reveal
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: 'top top',
+      end: '+=1500', // Keep it pinned while FAQs scroll over
+      pin: true,
+      pinSpacing: false, // Ensures FAQs slide over rather than being pushed down
+    })
+  }, { scope: containerRef })
 
   const openLightbox = (index) => setLightboxIndex(index)
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
@@ -60,7 +107,7 @@ function Gallery() {
   }, [lightboxIndex, closeLightbox, nextImg, prevImg])
 
   return (
-    <div className="gallery-page reveal" ref={revealRef}>
+    <div className="gallery-page" id="gallery" ref={containerRef}>
       <h1 className="gallery-page__heading">Gallery</h1>
       <p className="gallery-page__subtitle">
         Memories from past editions. A glimpse into the Dhyuthi experience.

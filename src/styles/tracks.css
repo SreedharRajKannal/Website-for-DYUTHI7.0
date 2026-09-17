@@ -1,9 +1,29 @@
 /* ─── Tracks Page ───────────────────────────────────────────────────── */
 
-.tracks-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-16) var(--space-6);
+/* ─── Tracks Page Pinned Layout ───────────────────────────────────────── */
+
+.tracks-pin-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--bg-default);
+}
+
+.tracks-text-side {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 800px;
+  padding: 0 var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
 }
 
 .tracks-page__heading {
@@ -20,15 +40,28 @@
   text-align: center;
   color: var(--text-muted);
   font-size: var(--text-base);
-  margin-bottom: var(--space-12);
 }
 
-/* ─── Track Grid ────────────────────────────────────────────────────── */
+/* ─── Track Grid / Cards Layer ────────────────────────────────────────── */
 
-.tracks-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-8);
+.tracks-cards-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.absolute-track-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  margin-top: -240px;
+  margin-left: -170px;
+  pointer-events: auto;
+  will-change: transform;
 }
 
 /* ─── Track Card ────────────────────────────────────────────────────── */

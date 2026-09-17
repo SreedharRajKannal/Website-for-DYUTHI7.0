@@ -1,3 +1,12 @@
+/* ─── FAQs Curtain Wrapper ────────────────────────────────────────────── */
+
+.faqs-curtain-wrapper {
+  position: relative;
+  z-index: 50; /* Ensure it stays above the pinned Gallery */
+  background: var(--bg-default);
+  box-shadow: 0 -20px 40px -10px rgba(0, 0, 0, 0.5); /* Drop shadow on top edge */
+}
+
 /* ─── FAQs Page ─────────────────────────────────────────────────────── */
 
 .faqs-page {

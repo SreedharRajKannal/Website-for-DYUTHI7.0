@@ -1,10 +1,8 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import Carousel from '../components/Carousel'
 import { useSEO } from '../hooks/useSEO'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import logo from '../assets/dhyuthi-logo.png'
 import '../styles/about.css'
 
@@ -38,30 +36,59 @@ const PRE_EVENTS = [
 
 function About() {
   useSEO('About', 'Learn more about Dhyuthi 7.0 and its pre-events.')
-  const revealIntro = useScrollReveal()
-  const carouselContainerRef = useRef(null)
+  const pinRef = useRef(null)
+  const introRef = useRef(null)
+  const cardsRef = useRef([])
 
   useGSAP(() => {
-    gsap.fromTo(carouselContainerRef.current,
-      { scale: 0.95, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: carouselContainerRef.current,
-          start: 'top bottom-=100',
-          toggleActions: 'play none none reverse'
-        }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pinRef.current,
+        start: 'top top',
+        end: '+=2500', // Duration of the pinned scroll
+        scrub: 1,
+        pin: true,
       }
+    })
+
+    // 1. Move the intro section out to the left
+    tl.to(introRef.current, { xPercent: -100, ease: 'none' }, 0)
+
+    // 2. Animate cards in from bottom right (y: 100vh, x: 50vw)
+    // and fan them out horizontally.
+    tl.fromTo(cardsRef.current,
+      { y: '100vh', x: '50vw', opacity: 0 },
+      { 
+        y: 0, 
+        x: (index) => index * 340, // 340px spacing between cards
+        opacity: 1,
+        stagger: 0.1, 
+        ease: 'power2.out',
+        duration: 1
+      },
+      0.1
     )
-  }, { scope: carouselContainerRef })
+
+    // 3. Move them leftwards to simulate horizontal scrolling
+    tl.to(cardsRef.current, {
+      x: (index) => (index * 340) - 1200, // Move left by 1200px
+      ease: 'none',
+      duration: 2
+    }, 1.2)
+
+  }, { scope: pinRef })
+
+  // Initialize refs array
+  const addToCardsRef = (el) => {
+    if (el && !cardsRef.current.includes(el)) {
+      cardsRef.current.push(el)
+    }
+  }
 
   return (
-    <div className="about">
+    <div className="about-pin-wrapper" id="about" ref={pinRef}>
       {/* ── About Intro ────────────────────────────────────────── */}
-      <section className="about__intro reveal" id="about-intro" ref={revealIntro}>
+      <section className="about__intro" ref={introRef}>
         <div className="about__logo-side">
           <img
             src={logo}
@@ -108,35 +135,33 @@ function About() {
         </div>
       </section>
 
-      {/* ── Pre-Events Carousel ────────────────────────────────── */}
-      <section className="about__pre-events" id="pre-events" ref={carouselContainerRef}>
-        <Carousel
-          title="Pre-Events"
-          subtitle="Warm up before the main fest — open registrations now."
-          visibleCards={3}
-        >
-          {PRE_EVENTS.map((event) => (
-            <article className="pre-event-card" key={event.id}>
-              {/* Poster placeholder — do NOT design actual graphics */}
-              <div className="pre-event-card__poster">
-                <span className="pre-event-card__poster-label">
-                  Poster coming soon
-                </span>
-              </div>
+      {/* ── Pre-Events Cards ────────────────────────────────── */}
+      <section className="about__pre-events-layer">
+        {PRE_EVENTS.map((event, index) => (
+          <article 
+            className="pre-event-card absolute-card" 
+            key={event.id}
+            ref={addToCardsRef}
+            style={{ zIndex: 10 + index }}
+          >
+            <div className="pre-event-card__poster">
+              <span className="pre-event-card__poster-label">
+                Poster coming soon
+              </span>
+            </div>
 
-              <div className="pre-event-card__body">
-                <h3 className="pre-event-card__title">{event.title}</h3>
-                <p className="pre-event-card__blurb">{event.blurb}</p>
-                <a
-                  href={event.registerLink}
-                  className="pre-event-card__register"
-                >
-                  Register
-                </a>
-              </div>
-            </article>
-          ))}
-        </Carousel>
+            <div className="pre-event-card__body">
+              <h3 className="pre-event-card__title">{event.title}</h3>
+              <p className="pre-event-card__blurb">{event.blurb}</p>
+              <a
+                href={event.registerLink}
+                className="pre-event-card__register"
+              >
+                Register
+              </a>
+            </div>
+          </article>
+        ))}
       </section>
     </div>
   )

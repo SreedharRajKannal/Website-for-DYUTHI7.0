@@ -1,19 +1,31 @@
 /* ─── About Page ────────────────────────────────────────────────────── */
 
-.about {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-16) var(--space-6);
+/* ─── About Page Pinned Layout ───────────────────────────────────────── */
+
+.about-pin-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--bg-default); /* Ensure background is solid for pinning */
 }
 
 /* ─── About Intro Section ───────────────────────────────────────────── */
 
 .about__intro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 var(--space-6);
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-12);
   align-items: center;
-  margin-bottom: var(--space-20);
+  will-change: transform;
 }
 
 .about__logo-side {
@@ -87,10 +99,29 @@
   flex-shrink: 0;
 }
 
-/* ─── Pre-Events Section ────────────────────────────────────────────── */
+/* ─── Pre-Events Layer ────────────────────────────────────────────── */
 
-.about__pre-events {
-  margin-top: var(--space-8);
+.about__pre-events-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Let clicks pass through empty space */
+}
+
+/* Pre-event card absolute positioning */
+.absolute-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  /* Use margin instead of transform translate to center it, 
+     because GSAP will animate transform x/y */
+  margin-top: -240px; 
+  margin-left: -160px;
+  pointer-events: auto;
+  will-change: transform;
 }
 
 /* Pre-event card */

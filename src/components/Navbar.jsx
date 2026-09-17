@@ -1,18 +1,16 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Link, NavLink } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import logo from '../assets/dhyuthi-logo.png'
 import ieeeLogo from '../assets/ieee-master-brand.svg'
 import '../styles/navbar.css'
 
 const NAV_ITEMS = [
-  { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Tracks', path: '/tracks' },
-  { label: 'Schedule', path: '/schedule' },
-  { label: 'Gallery', path: '/gallery' },
-  { label: 'FAQs', path: '/faqs' },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Home', path: '#hero' },
+  { label: 'About', path: '#about' },
+  { label: 'Tracks', path: '#tracks' },
+  { label: 'Schedule', path: '#schedule' },
+  { label: 'Gallery', path: '#gallery' },
+  { label: 'FAQs', path: '#faqs' },
 ]
 
 function Navbar() {
@@ -43,26 +41,23 @@ function Navbar() {
         aria-label="Main navigation"
       >
         {/* Brand */}
-        <Link to="/" className="navbar__brand" onClick={closeMobile}>
+        <a href="#hero" className="navbar__brand" onClick={closeMobile}>
           <img src={logo} alt="Dhyuthi 7.0 logo" className="navbar__logo" />
           <span className="navbar__wordmark">
             DHYUTHI <span>7.0</span>
           </span>
-        </Link>
+        </a>
 
         {/* Desktop links */}
         <ul className="navbar__links">
           {NAV_ITEMS.map((item) => (
             <li key={item.path}>
-              <NavLink
-                to={item.path}
-                end={item.path === '/'}
-                className={({ isActive }) =>
-                  `navbar__link${isActive ? ' navbar__link--active' : ''}`
-                }
+              <a
+                href={item.path}
+                className="navbar__link"
               >
                 {item.label}
-              </NavLink>
+              </a>
             </li>
           ))}
         </ul>
@@ -96,12 +91,12 @@ function Navbar() {
         aria-label="Mobile navigation"
       >
         <div className="navbar__mobile-header">
-          <Link to="/" className="navbar__brand" onClick={closeMobile}>
+          <a href="#hero" className="navbar__brand" onClick={closeMobile}>
             <img src={logo} alt="Dhyuthi 7.0 logo" className="navbar__logo" />
             <span className="navbar__wordmark">
               DHYUTHI <span>7.0</span>
             </span>
-          </Link>
+          </a>
           <button
             className="navbar__mobile-close"
             onClick={closeMobile}
@@ -114,16 +109,13 @@ function Navbar() {
         <ul className="navbar__mobile-links">
           {NAV_ITEMS.map((item) => (
             <li key={item.path}>
-              <NavLink
-                to={item.path}
-                end={item.path === '/'}
-                className={({ isActive }) =>
-                  `navbar__mobile-link${isActive ? ' navbar__mobile-link--active' : ''}`
-                }
+              <a
+                href={item.path}
+                className="navbar__mobile-link"
                 onClick={closeMobile}
               >
                 {item.label}
-              </NavLink>
+              </a>
             </li>
           ))}
         </ul>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 import logo from '../assets/dhyuthi-logo.png'
 import ieeeLogo from '../assets/ieee-master-brand.svg'
@@ -43,7 +42,7 @@ function Footer() {
       <div className="footer__inner">
         {/* ── Brand Column ─────────────────────────────────────── */}
         <div className="footer__brand">
-          <Link to="/" className="footer__brand-link">
+          <a href="#hero" className="footer__brand-link">
             <img
               src={logo}
               alt="Dhyuthi 7.0 logo"
@@ -52,7 +51,7 @@ function Footer() {
             <span className="footer__brand-name">
               Dhyuthi <span>7.0</span>
             </span>
-          </Link>
+          </a>
           <p className="footer__brand-tagline">
             IEEE SCT Student Branch&apos;s flagship annual tech-fest.
             Celebrating innovation, creativity, and collaboration.

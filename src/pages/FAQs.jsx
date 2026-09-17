@@ -1,8 +1,6 @@
 import Accordion from '../components/Accordion'
 import Venue from '../components/Venue'
-import { MapPin, Mail, Phone } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import '../styles/faqs.css'
 
 const FAQ_DATA = [
@@ -35,10 +33,10 @@ const FAQ_DATA = [
 
 function FAQs() {
   useSEO('FAQs', 'Frequently asked questions about Dhyuthi 7.0.')
-  const revealRef = useScrollReveal()
 
   return (
-    <div className="faqs-page reveal" ref={revealRef}>
+    <div className="faqs-curtain-wrapper" id="faqs">
+      <div className="faqs-page">
       <h1 className="faqs-page__heading">FAQs</h1>
       <p className="faqs-page__subtitle">
         Got questions? We&apos;ve got answers.
@@ -51,6 +49,7 @@ function FAQs() {
 
       {/* ── Venue Section ─────────────────────────────────────────────── */}
       <Venue />
+      </div>
     </div>
   )
 }
