@@ -1,9 +1,13 @@
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import Accordion from '../components/Accordion'
 import Venue from '../components/Venue'
-import { MapPin, Mail, Phone } from 'lucide-react'
 import { useSEO } from '../hooks/useSEO'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import '../styles/faqs.css'
+
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const FAQ_DATA = [
   {
@@ -35,10 +39,28 @@ const FAQ_DATA = [
 
 function FAQs() {
   useSEO('FAQs', 'Frequently asked questions about Dhyuthi 7.0.')
-  const revealRef = useScrollReveal()
+  const faqsRef = useRef(null)
+
+  useGSAP(() => {
+    gsap.fromTo('.accordion-item', 
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: faqsRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        }
+      }
+    )
+  }, { scope: faqsRef })
 
   return (
-    <div className="faqs-page reveal" ref={revealRef}>
+    <div className="faqs-page" id="faqs" ref={faqsRef}>
       <h1 className="faqs-page__heading">FAQs</h1>
       <p className="faqs-page__subtitle">
         Got questions? We&apos;ve got answers.

@@ -1,9 +1,31 @@
 /* ─── Tracks Page ───────────────────────────────────────────────────── */
 
-.tracks-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-16) var(--space-6);
+/* ─── Tracks Page Pinned Layout ───────────────────────────────────────── */
+
+.tracks-pin-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-default);
+}
+
+.tracks-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  height: 100vh;
+  will-change: transform;
+}
+
+.tracks-text-side {
+  width: 100vw; /* Take full viewport width initially */
+  max-width: 100vw;
+  padding: 0 var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .tracks-page__heading {
@@ -20,15 +42,21 @@
   text-align: center;
   color: var(--text-muted);
   font-size: var(--text-base);
-  margin-bottom: var(--space-12);
 }
 
-/* ─── Track Grid ────────────────────────────────────────────────────── */
+/* ─── Track Grid / Cards Layer ────────────────────────────────────────── */
 
-.tracks-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.tracks-cards-layer {
+  display: flex;
+  align-items: center;
   gap: var(--space-8);
+  padding: 0 var(--space-16);
+  height: 100vh;
+}
+
+.track-card-wrapper {
+  width: 360px;
+  flex-shrink: 0;
 }
 
 /* ─── Track Card ────────────────────────────────────────────────────── */

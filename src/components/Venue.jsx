@@ -1,9 +1,36 @@
+import { useRef } from 'react'
 import { MapPin, Mail, Phone } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import '../styles/venue.css'
 
+gsap.registerPlugin(ScrollTrigger, useGSAP)
+
 function Venue() {
+  const venueRef = useRef(null)
+
+  useGSAP(() => {
+    // Fade up the heading, map, and contact blocks
+    gsap.fromTo('.venue-section__heading, .venue-map, .venue-details__block',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: venueRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        }
+      }
+    )
+  }, { scope: venueRef })
+
   return (
-    <section className="venue-section" aria-labelledby="venue-heading">
+    <section className="venue-section" aria-labelledby="venue-heading" ref={venueRef}>
       <h2 className="venue-section__heading" id="venue-heading">Venue & Contact</h2>
       
       <div className="venue-grid">

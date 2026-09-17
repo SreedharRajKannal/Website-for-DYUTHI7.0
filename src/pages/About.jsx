@@ -1,10 +1,8 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import Carousel from '../components/Carousel'
 import { useSEO } from '../hooks/useSEO'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import logo from '../assets/dhyuthi-logo.png'
 import '../styles/about.css'
 
@@ -38,41 +36,41 @@ const PRE_EVENTS = [
 
 function About() {
   useSEO('About', 'Learn more about Dhyuthi 7.0 and its pre-events.')
-  const revealIntro = useScrollReveal()
-  const carouselContainerRef = useRef(null)
+  const pinRef = useRef(null)
+  const trackRef = useRef(null)
 
   useGSAP(() => {
-    gsap.fromTo(carouselContainerRef.current,
-      { scale: 0.95, opacity: 0 },
-      {
-        scale: 1,
-        opacity: 1,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: carouselContainerRef.current,
-          start: 'top bottom-=100',
-          toggleActions: 'play none none reverse'
-        }
+    gsap.to(trackRef.current, {
+      x: () => -(trackRef.current.scrollWidth - window.innerWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: pinRef.current,
+        start: 'top top',
+        end: () => "+=" + trackRef.current.scrollWidth,
+        scrub: 1,
+        pin: true,
+        invalidateOnRefresh: true, // Recalculate on resize
       }
-    )
-  }, { scope: carouselContainerRef })
+    })
+  }, { scope: pinRef })
 
   return (
-    <div className="about">
-      {/* ── About Intro ────────────────────────────────────────── */}
-      <section className="about__intro reveal" id="about-intro" ref={revealIntro}>
-        <div className="about__logo-side">
-          <img
-            src={logo}
-            alt="Dhyuthi 7.0 logo"
-            className="about__logo"
-          />
-          <span className="about__logo-badge">IEEE SCT SB</span>
-        </div>
+    <div className="about-pin-wrapper" id="about" ref={pinRef}>
+      <div className="about-scroll-track" ref={trackRef}>
+        {/* ── About Intro ────────────────────────────────────────── */}
+        <section className="about__intro">
+          <div className="about__intro-inner">
+            <div className="about__logo-side">
+              <img
+                src={logo}
+                alt="Dhyuthi 7.0 logo"
+                className="about__logo"
+              />
+              <span className="about__logo-badge">IEEE SCT SB</span>
+            </div>
 
-        <div className="about__text-side">
-          <h1 className="about__heading">About Dhyuthi 7.0</h1>
+            <div className="about__text-side">
+              <h1 className="about__heading">About Dhyuthi 7.0</h1>
 
           {/*
            * ──────────────────────────────────────────────────────
@@ -105,19 +103,17 @@ function About() {
               create something extraordinary.
             </p>
           </div>
-        </div>
-      </section>
+            </div>
+          </div>
+        </section>
 
-      {/* ── Pre-Events Carousel ────────────────────────────────── */}
-      <section className="about__pre-events" id="pre-events" ref={carouselContainerRef}>
-        <Carousel
-          title="Pre-Events"
-          subtitle="Warm up before the main fest — open registrations now."
-          visibleCards={3}
-        >
+        {/* ── Pre-Events Cards ────────────────────────────────── */}
+        <section className="about__pre-events-layer">
           {PRE_EVENTS.map((event) => (
-            <article className="pre-event-card" key={event.id}>
-              {/* Poster placeholder — do NOT design actual graphics */}
+            <article 
+              className="pre-event-card" 
+              key={event.id}
+            >
               <div className="pre-event-card__poster">
                 <span className="pre-event-card__poster-label">
                   Poster coming soon
@@ -136,8 +132,8 @@ function About() {
               </div>
             </article>
           ))}
-        </Carousel>
-      </section>
+        </section>
+      </div>
     </div>
   )
 }

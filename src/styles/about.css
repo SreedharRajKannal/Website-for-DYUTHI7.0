@@ -1,19 +1,40 @@
 /* ─── About Page ────────────────────────────────────────────────────── */
 
-.about {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-16) var(--space-6);
+/* ─── About Page Pinned Layout ───────────────────────────────────────── */
+
+.about-pin-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-default);
+}
+
+.about-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  height: 100vh;
+  will-change: transform;
 }
 
 /* ─── About Intro Section ───────────────────────────────────────────── */
 
 .about__intro {
+  width: 100vw; /* Take full viewport width initially */
+  max-width: 100vw;
+  padding: 0 var(--space-6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about__intro-inner {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-12);
   align-items: center;
-  margin-bottom: var(--space-20);
+  max-width: 1200px;
 }
 
 .about__logo-side {
@@ -87,14 +108,20 @@
   flex-shrink: 0;
 }
 
-/* ─── Pre-Events Section ────────────────────────────────────────────── */
+/* ─── Pre-Events Layer ────────────────────────────────────────────── */
 
-.about__pre-events {
-  margin-top: var(--space-8);
+.about__pre-events-layer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 0 var(--space-16); /* Give some padding after the intro text */
+  height: 100vh;
 }
 
 /* Pre-event card */
 .pre-event-card {
+  width: 320px;
+  flex-shrink: 0;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);

@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom'
 import { ReactLenis } from 'lenis/react'
 import Layout from './components/Layout'
 import Home from './pages/Home'
@@ -7,25 +6,19 @@ import Tracks from './pages/Tracks'
 import Schedule from './pages/Schedule'
 import Gallery from './pages/Gallery'
 import FAQs from './pages/FAQs'
-import Contact from './pages/Contact'
-import StyleGuide from './pages/StyleGuide'
 import './styles/App.css'
 
 function App() {
   return (
     <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
-      <Routes>
-        <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/tracks" element={<Tracks />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/style-guide" element={<StyleGuide />} />
-      </Route>
-    </Routes>
+      <Layout>
+        <Home />
+        <About />
+        <Tracks />
+        <Schedule />
+        <Gallery />
+        <FAQs />
+      </Layout>
     </ReactLenis>
   )
 }

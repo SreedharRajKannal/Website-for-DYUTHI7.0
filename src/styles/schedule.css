@@ -104,8 +104,7 @@
 }
 
 /* Vertical connecting line */
-.timeline::before {
-  content: '';
+.timeline__line {
   position: absolute;
   top: 12px;
   bottom: 12px;

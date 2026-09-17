@@ -37,26 +37,7 @@ function TrackCard({ track, index }) {
   }, [modalOpen, closeModal])
 
   /* ── GSAP Animations ─────────────────────────────────────────── */
-  useGSAP(() => {
-    // 1. ScrollTrigger Parallax Entrance
-    // Calculate an asymmetric Y offset (even indexes start lower)
-    const yOffset = index % 2 === 0 ? 100 : 160
-    
-    gsap.fromTo(cardRef.current, 
-      { y: yOffset, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 1, 
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: 'top bottom-=100',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    )
-  }, { scope: cardRef })
+  // ScrollTrigger parallax has been moved to the parent pinned timeline
 
   /* ── GSAP Modal Animation ────────────────────────────────────── */
   // We use a regular useEffect here so it runs every time modalOpen changes
