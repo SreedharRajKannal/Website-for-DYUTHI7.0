@@ -1,0 +1,279 @@
+/* ─── Home / Hero ───────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Offset the fixed navbar so content starts from viewport top */
+  margin-top: -68px;
+  padding-top: 68px;
+}
+
+/* ── Canvas background ──────────────────────────────────────────────── */
+
+.constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Radial glow overlays for atmosphere */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Teal glow — top-right */
+.hero::before {
+  width: 700px;
+  height: 700px;
+  top: -15%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(0, 212, 212, 0.08) 0%, transparent 70%);
+}
+
+/* Amber glow — bottom-left */
+.hero::after {
+  width: 600px;
+  height: 600px;
+  bottom: -10%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(255, 184, 30, 0.06) 0%, transparent 70%);
+}
+
+/* ── Hero content ───────────────────────────────────────────────────── */
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-6);
+  max-width: 800px;
+}
+
+/* Logo */
+.hero__logo {
+  width: 140px;
+  height: auto;
+  filter: drop-shadow(0 0 30px rgba(0, 212, 212, 0.2));
+  animation: heroLogoFloat 6s ease-in-out infinite;
+}
+
+@keyframes heroLogoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* Main heading */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--text-7xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+.hero__title span {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tagline */
+.hero__tagline {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-secondary);
+}
+
+.hero__tagline em {
+  font-style: normal;
+  color: var(--color-secondary-400);
+}
+
+/* ── Countdown section ──────────────────────────────────────────────── */
+
+.hero__countdown-wrap {
+  margin-top: var(--space-2);
+}
+
+/* ── Event meta (dates + venue) ─────────────────────────────────────── */
+
+.hero__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.hero__dates {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-secondary-400);
+}
+
+.hero__venue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.hero__venue svg {
+  color: var(--color-accent-400);
+  flex-shrink: 0;
+}
+
+/* ── CTA Button ─────────────────────────────────────────────────────── */
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-10);
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-inverse);
+  background: var(--gradient-hero);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+  animation: ctaGradientShift 4s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes ctaGradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 60%
+  );
+  background-size: 250% 100%;
+  animation: ctaShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ctaShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.hero__cta:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 30px rgba(0, 212, 212, 0.3),
+              0 0 60px rgba(255, 184, 30, 0.15);
+}
+
+.hero__cta:active {
+  transform: scale(0.98);
+}
+
+/* ── Scroll hint ────────────────────────────────────────────────────── */
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .hero__logo {
+    width: 100px;
+  }
+
+  .hero__title {
+    font-size: var(--text-5xl);
+  }
+
+  .hero__tagline {
+    font-size: var(--text-lg);
+  }
+
+  .hero__cta {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--text-sm);
+  }
+
+  .hero::before {
+    width: 400px;
+    height: 400px;
+  }
+
+  .hero::after {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: var(--text-4xl);
+  }
+
+  .hero__tagline {
+    font-size: var(--text-base);
+  }
+
+  .hero__logo {
+    width: 80px;
+  }
+}

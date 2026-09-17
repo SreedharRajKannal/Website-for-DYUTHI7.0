@@ -1,0 +1,279 @@
+/* ─── Navbar ────────────────────────────────────────────────────────── */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-8);
+  transition: background-color var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              backdrop-filter var(--duration-normal) var(--ease-out);
+}
+
+/* Transparent state (over hero) */
+.navbar--transparent {
+  background-color: transparent;
+}
+
+/* Solid state (after scroll) */
+.navbar--solid {
+  background-color: rgba(10, 14, 19, 0.88);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow: 0 1px 0 var(--border-subtle),
+              var(--shadow-sm);
+}
+
+/* ─── Logo / Brand ──────────────────────────────────────────────────── */
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.navbar__wordmark span {
+  color: var(--color-primary-400);
+}
+
+/* ─── Desktop Nav Links ─────────────────────────────────────────────── */
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.navbar__link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-normal) var(--ease-out),
+              left var(--duration-normal) var(--ease-out);
+}
+
+.navbar__link:hover {
+  color: var(--color-primary-300);
+  background-color: rgba(0, 212, 212, 0.06);
+}
+
+.navbar__link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+.navbar__link--active {
+  color: var(--color-primary-400);
+}
+
+.navbar__link--active::after {
+  width: 60%;
+  left: 20%;
+}
+
+/* ─── Hamburger Toggle ──────────────────────────────────────────────── */
+
+.navbar__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
+}
+
+.navbar__toggle:hover {
+  background-color: rgba(0, 212, 212, 0.08);
+  border-color: var(--color-primary-600);
+}
+
+/* ─── Mobile Menu Overlay ───────────────────────────────────────────── */
+
+.navbar__mobile-overlay {
+  display: none;
+}
+
+/* ─── Mobile Drawer ─────────────────────────────────────────────────── */
+
+.navbar__mobile-menu {
+  display: none;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: var(--space-3) var(--space-5);
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__toggle {
+    display: flex;
+  }
+
+  /* Overlay scrim */
+  .navbar__mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--bg-overlay);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--duration-normal) var(--ease-out),
+                visibility var(--duration-normal) var(--ease-out);
+  }
+
+  .navbar__mobile-overlay--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Drawer panel */
+  .navbar__mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(320px, 85vw);
+    height: 100vh;
+    background-color: var(--bg-surface);
+    border-left: 1px solid var(--border-subtle);
+    z-index: var(--z-modal);
+    padding: var(--space-8) var(--space-6);
+    transform: translateX(100%);
+    transition: transform var(--duration-slow) var(--ease-out);
+    overflow-y: auto;
+  }
+
+  .navbar__mobile-menu--open {
+    transform: translateX(0);
+  }
+
+  .navbar__mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+  }
+
+  .navbar__mobile-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+
+  .navbar__mobile-close:hover {
+    background-color: rgba(255, 107, 74, 0.1);
+  }
+
+  .navbar__mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    list-style: none;
+  }
+
+  .navbar__mobile-link {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: color var(--duration-fast) var(--ease-out),
+                background-color var(--duration-fast) var(--ease-out),
+                padding-left var(--duration-fast) var(--ease-out);
+  }
+
+  .navbar__mobile-link:hover {
+    color: var(--color-primary-300);
+    background-color: rgba(0, 212, 212, 0.06);
+    padding-left: var(--space-6);
+  }
+
+  .navbar__mobile-link--active {
+    color: var(--color-primary-400);
+    background-color: rgba(0, 212, 212, 0.08);
+    border-left: 3px solid var(--color-primary-500);
+  }
+}
+
+/* --- IEEE Branding --------------------------------------------------- */
+.navbar__ieee {
+  display: flex;
+  align-items: center;
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--border-default);
+  margin-left: var(--space-2);
+}
+.ieee-master-brand {
+  min-width: 100px;
+  height: auto;
+  /* Clear space is typically 0.5x height, padding inside the image handles this, or we can add margin if requested, but min-width is strict */
+}

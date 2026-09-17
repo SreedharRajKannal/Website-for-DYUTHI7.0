@@ -1,0 +1,13 @@
+/* ─── App-level Layout ──────────────────────────────────────────────── */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout__main {
+  flex: 1;
+  /* Offset for fixed navbar — matches navbar height */
+  padding-top: 68px;
+}

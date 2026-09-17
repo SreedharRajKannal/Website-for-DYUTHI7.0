@@ -1,0 +1,230 @@
+/* ─── About Page ────────────────────────────────────────────────────── */
+
+.about {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+/* ─── About Intro Section ───────────────────────────────────────────── */
+
+.about__intro {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-12);
+  align-items: center;
+  margin-bottom: var(--space-20);
+}
+
+.about__logo-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.about__logo {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 0 24px rgba(0, 212, 212, 0.15));
+}
+
+.about__logo-badge {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-primary-400);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-primary-700);
+  border-radius: var(--radius-full);
+  background: rgba(0, 212, 212, 0.06);
+}
+
+.about__text-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.about__heading {
+  font-size: var(--text-5xl);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-2);
+}
+
+.about__body p {
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--text-secondary);
+}
+
+.about__body p + p {
+  margin-top: var(--space-4);
+}
+
+.about__body strong {
+  color: var(--text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.about__body em {
+  color: var(--color-secondary-400);
+  font-style: normal;
+}
+
+/* Highlight bar accent next to text */
+.about__text-side::before {
+  content: '';
+  width: 4px;
+  height: 60px;
+  background: var(--gradient-hero);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* ─── Pre-Events Section ────────────────────────────────────────────── */
+
+.about__pre-events {
+  margin-top: var(--space-8);
+}
+
+/* Pre-event card */
+.pre-event-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+}
+
+.pre-event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-default);
+}
+
+/* Image placeholder */
+.pre-event-card__poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Subtle pattern inside the poster placeholder */
+.pre-event-card__poster::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(0, 212, 212, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(255, 184, 30, 0.04) 0%, transparent 50%);
+}
+
+.pre-event-card__poster-label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+  letter-spacing: var(--tracking-wide);
+  padding: var(--space-3) var(--space-5);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+/* Card body */
+.pre-event-card__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.pre-event-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.pre-event-card__blurb {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+  flex: 1;
+}
+
+.pre-event-card__register {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary-400);
+  text-decoration: none;
+  letter-spacing: var(--tracking-wide);
+  transition: color var(--duration-fast) var(--ease-out);
+  margin-top: var(--space-2);
+}
+
+.pre-event-card__register:hover {
+  color: var(--color-primary-300);
+}
+
+.pre-event-card__register::after {
+  content: '→';
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.pre-event-card__register:hover::after {
+  transform: translateX(4px);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .about__intro {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-8);
+  }
+
+  .about__text-side::before {
+    align-self: center;
+  }
+
+  .about__logo {
+    width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  .about__heading {
+    font-size: var(--text-4xl);
+  }
+
+  .about__logo {
+    width: 110px;
+  }
+}

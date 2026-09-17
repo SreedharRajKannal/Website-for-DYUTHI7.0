@@ -1,0 +1,129 @@
+/* ─── Accordion Component ───────────────────────────────────────────── */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.accordion__item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.accordion__item:hover {
+  border-color: var(--border-default);
+}
+
+.accordion__item--open {
+  border-color: var(--color-primary-700);
+  box-shadow: 0 4px 20px rgba(0, 212, 212, 0.05);
+}
+
+.accordion__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.accordion__trigger:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.accordion__item--open .accordion__trigger {
+  background: rgba(0, 212, 212, 0.04);
+}
+
+.accordion__question {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  flex: 1;
+}
+
+.accordion__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-500);
+  flex-shrink: 0;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+/* 
+  Animate the icon. 
+  When opened, we could rotate the minus slightly, or just let it swap cleanly.
+  Here we just add a subtle spin when switching state.
+*/
+.accordion__item--open .accordion__icon {
+  transform: rotate(90deg);
+  color: var(--color-primary-400);
+}
+
+.accordion__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-normal) var(--ease-out);
+}
+
+/* Open state animation technique using CSS grid */
+.accordion__item--open .accordion__content {
+  grid-template-rows: 1fr;
+}
+
+.accordion__inner {
+  overflow: hidden;
+  padding: 0 var(--space-6);
+}
+
+.accordion__item--open .accordion__inner {
+  padding-bottom: var(--space-6);
+  /* The padding-top is implicitly provided by the trigger's bottom padding when closed, 
+     but adding a little margin creates separation */
+  margin-top: var(--space-4);
+}
+
+.accordion__inner p {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-base);
+}
+
+.accordion__inner p + p {
+  margin-top: var(--space-3);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .accordion__trigger {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .accordion__question {
+    font-size: var(--text-base);
+  }
+  
+  .accordion__inner {
+    padding: 0 var(--space-5);
+  }
+  
+  .accordion__item--open .accordion__inner {
+    padding-bottom: var(--space-5);
+  }
+}

@@ -1,0 +1,255 @@
+/* ─── Schedule Page ─────────────────────────────────────────────────── */
+
+.schedule-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-6);
+}
+
+.schedule-page__heading {
+  font-size: var(--text-5xl);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+
+.schedule-page__subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-12);
+}
+
+/* ─── Layout: sidebar tabs + timeline ───────────────────────────────── */
+
+.schedule__layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+/* ─── Day Tabs (sidebar pills) ──────────────────────────────────────── */
+
+.schedule__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: sticky;
+  top: 100px;
+}
+
+.schedule__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  text-align: left;
+}
+
+.schedule__tab-day {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.schedule__tab-date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.schedule__tab:hover {
+  background: rgba(0, 212, 212, 0.04);
+  border-color: var(--border-subtle);
+}
+
+.schedule__tab:hover .schedule__tab-day {
+  color: var(--text-primary);
+}
+
+/* Active tab */
+.schedule__tab--active {
+  background: rgba(0, 212, 212, 0.08);
+  border-color: var(--color-primary-700);
+  box-shadow: inset 3px 0 0 var(--color-primary-500);
+}
+
+.schedule__tab--active .schedule__tab-day {
+  color: var(--color-primary-400);
+}
+
+.schedule__tab--active .schedule__tab-date {
+  color: var(--text-secondary);
+}
+
+/* ─── Timeline ──────────────────────────────────────────────────────── */
+
+.timeline {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+/* Vertical connecting line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 7px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-700),
+    var(--color-primary-500) 30%,
+    var(--color-primary-500) 70%,
+    var(--color-primary-700)
+  );
+  border-radius: var(--radius-full);
+}
+
+/* ─── Timeline Event ────────────────────────────────────────────────── */
+
+.timeline__event {
+  position: relative;
+  padding-bottom: var(--space-8);
+}
+
+.timeline__event:last-child {
+  padding-bottom: 0;
+}
+
+/* Dot on the timeline */
+.timeline__dot {
+  position: absolute;
+  left: calc(-1 * var(--space-8) + 1px);
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-base);
+  border: 2px solid var(--color-primary-500);
+  z-index: 1;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+/* Glow ring on hover */
+.timeline__event:hover .timeline__dot {
+  background: var(--color-primary-500);
+  box-shadow: 0 0 10px rgba(0, 212, 212, 0.4);
+}
+
+/* Card */
+.timeline__card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+
+.timeline__event:hover .timeline__card {
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
+}
+
+.timeline__time {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-primary-400);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.timeline__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.timeline__desc {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .schedule__layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .schedule__tabs {
+    flex-direction: row;
+    position: static;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+
+  .schedule__tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .schedule__tab {
+    flex-shrink: 0;
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-full);
+    align-items: center;
+    text-align: center;
+  }
+
+  .schedule__tab--active {
+    box-shadow: none;
+    border-color: var(--color-primary-600);
+    background: rgba(0, 212, 212, 0.12);
+  }
+}
+
+@media (max-width: 600px) {
+  .schedule-page {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  .schedule-page__heading {
+    font-size: var(--text-4xl);
+  }
+
+  .timeline {
+    padding-left: var(--space-6);
+  }
+
+  .timeline__dot {
+    left: calc(-1 * var(--space-6) + 1px);
+    width: 12px;
+    height: 12px;
+  }
+
+  .timeline__card {
+    padding: var(--space-4) var(--space-5);
+  }
+}
