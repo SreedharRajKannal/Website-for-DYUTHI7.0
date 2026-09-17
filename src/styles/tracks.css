@@ -103,7 +103,7 @@
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--color-primary-400);
+  color: var(--accent-silver);
   background: rgba(10, 14, 19, 0.75);
   backdrop-filter: blur(8px);
   padding: var(--space-1) var(--space-3);
@@ -154,18 +154,18 @@
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  color: var(--accent-gold);
+  color: var(--accent-silver);
   background: transparent;
-  border: 1px solid var(--accent-gold);
+  border: 1px solid var(--accent-silver);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-out);
 }
 
 .track-card__cta:hover {
-  background: rgba(214, 179, 106, 0.1);
-  border-color: var(--accent-gold);
-  box-shadow: var(--glow-gold);
+  background: rgba(200, 203, 208, 0.1);
+  border-color: var(--accent-silver);
+  box-shadow: var(--glow-silver);
 }
 
 /* ─── Modal Overlay ─────────────────────────────────────────────────── */
@@ -222,7 +222,7 @@
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--color-primary-400);
+  color: var(--accent-silver);
 }
 
 .track-modal__title {

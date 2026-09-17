@@ -43,15 +43,15 @@ function FluidShape() {
 
   return (
     <>
-      <pointLight ref={lightCyan} color="#00C8E8" intensity={50} distance={20} position={[0, 0, 2]} />
-      <pointLight ref={lightGreen} color="#D6B36A" intensity={30} distance={20} position={[0, 0, 2]} />
-      <ambientLight intensity={0.1} color="#05070A" />
+      <pointLight ref={lightCyan} color="#C8CBD0" intensity={50} distance={20} position={[0, 0, 2]} />
+      <pointLight ref={lightGreen} color="#FFFFFF" intensity={30} distance={20} position={[0, 0, 2]} />
+      <ambientLight intensity={0.1} color="#050505" />
 
       {/* Large plane to cover the screen */}
       <mesh ref={meshRef} position={[0, 0, -2]} scale={15}>
         <planeGeometry args={[2, 2, 64, 64]} />
         <MeshDistortMaterial
-          color="#05070A"
+          color="#050505"
           roughness={0.2}
           metalness={0.8}
           distort={0.4} // subtle fluid distortion
@@ -74,7 +74,7 @@ export default function WebGLBackground() {
         zIndex: 0,
         pointerEvents: 'auto',
         overflow: 'hidden',
-        background: '#05070A' // fallback color
+        background: '#050505' // fallback color
       }}
       aria-hidden="true"
     >

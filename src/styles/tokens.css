@@ -11,34 +11,34 @@
 :root {
   /* ─── COLOR PALETTE (Requested Hex Codes) ───────────────────────── */
   
-  --bg-main: #05070A;       /* Obsidian */
-  --bg-secondary: #0B0F14;  /* Graphite */
-  --card-bg: #111820;       /* Dark Slate */
-  --card-hover: #17212B;
+  --bg-main: #050505;       /* Obsidian */
+  --surface: #0D0D0F;       /* Deep Surface */
+  --card-bg: #141417;       /* Dark Card */
+  --card-hover: #1A1A1E;
   
-  --text-primary: #F4F1EA;  /* Ivory - Headings */
-  --text-secondary: #929CAA; /* Cool Gray - Body */
-  --text-muted: #596471;
+  --text-primary: #F5F5F2;  /* Ivory / Silver White - Headings */
+  --text-secondary: #9B9B9F; /* Cool Gray - Body */
+  --text-muted: #5E5E63;
   
-  --accent-gold: #D6B36A;   /* Champagne Gold */
-  --accent-cyan: #00C8E8;   /* Electric Cyan */
+  --accent-silver: #C8CBD0; /* Silver Accent */
+  --highlight: #FFFFFF;     /* Pure White */
   
-  --border-color: #252D36;
+  --border-color: #28282C;
 
   /* ─── SEMANTIC ALIASES FOR COMPATIBILITY ────────────────────────── */
   
   /* Primary / Secondary / Accent mapped to new palette */
-  --color-primary-300: #8ae4f2;
-  --color-primary-400: #42d7f0;
-  --color-primary-500: var(--accent-cyan);
-  --color-primary-600: #009eb8;
-  --color-primary-700: #00778a;
+  --color-primary-300: #e0e2e5;
+  --color-primary-400: #d4d6db;
+  --color-primary-500: var(--accent-silver);
+  --color-primary-600: #b4b8be;
+  --color-primary-700: #9da2a9;
 
-  --color-accent-300: #e3c994;
-  --color-accent-400: #dec184;
-  --color-accent-500: var(--accent-gold);
-  --color-accent-600: #b59556;
-  --color-accent-700: #917743;
+  --color-accent-300: #fcfcfc;
+  --color-accent-400: #fafafa;
+  --color-accent-500: var(--highlight);
+  --color-accent-600: #ebebeb;
+  --color-accent-700: #dedede;
 
   --color-secondary-400: var(--text-secondary);
   --color-secondary-500: var(--text-muted);
@@ -46,8 +46,8 @@
   /* Backgrounds */
   --bg-base:     var(--bg-main);
   --bg-surface:  var(--card-bg);
-  --bg-elevated: var(--bg-secondary);
-  --bg-overlay:  rgba(5, 7, 10, 0.85);
+  --bg-elevated: var(--surface);
+  --bg-overlay:  rgba(5, 5, 5, 0.85);
   --bg-default:  var(--bg-main);
 
   /* Borders */
@@ -56,11 +56,10 @@
   --border-strong:  var(--text-muted);
 
   /* Gradients */
-  --gradient-primary:    linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
-  --gradient-secondary:  linear-gradient(135deg, var(--bg-secondary), var(--card-bg));
-  --gradient-hero:       linear-gradient(160deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
-  --gradient-glow-cyan:  radial-gradient(ellipse at center, rgba(0, 200, 232, 0.15) 0%, transparent 70%);
-  --gradient-glow-gold:  radial-gradient(ellipse at center, rgba(214, 179, 106, 0.12) 0%, transparent 70%);
+  --gradient-primary:    linear-gradient(135deg, var(--highlight), var(--accent-silver));
+  --gradient-secondary:  linear-gradient(135deg, var(--surface), var(--card-bg));
+  --gradient-hero:       linear-gradient(160deg, var(--highlight) 0%, var(--accent-silver) 100%);
+  --gradient-glow-silver: radial-gradient(ellipse at center, rgba(200, 203, 208, 0.15) 0%, transparent 70%);
 
   /* ─── TYPOGRAPHY ────────────────────────────────────────────────── */
 
@@ -137,10 +136,8 @@
                 0 8px  10px rgba(0, 0, 0, 0.25);
 
   /* Glow shadows (for hover / focus states) */
-  --glow-primary:   0 0 20px rgba(0, 200, 232, 0.3),
-                    0 0 60px rgba(0, 200, 232, 0.1);
-  --glow-gold:      0 0 20px rgba(214, 179, 106, 0.3),
-                    0 0 60px rgba(214, 179, 106, 0.1);
+  --glow-primary:   0 0 15px rgba(200, 203, 208, 0.2);
+  --glow-silver:    0 0 15px rgba(200, 203, 208, 0.2);
 
   /* ─── TRANSITIONS ───────────────────────────────────────────────── */
 
