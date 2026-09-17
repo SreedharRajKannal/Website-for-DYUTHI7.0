@@ -201,11 +201,12 @@
 .track-modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: var(--z-overlay);
-  background: var(--bg-overlay);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(5px);
   padding: var(--space-6);
   animation: modalFadeIn var(--duration-normal) var(--ease-out);
 }

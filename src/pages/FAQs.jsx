@@ -13,7 +13,7 @@ const FAQ_DATA = [
   {
     id: 'faq-1',
     question: 'Who can participate in Dhyuthi 7.0?',
-    answer: <p>Dhyuthi is open to all undergraduate and postgraduate students from any college or university. Some specific pre-events may also be open to high school students, which will be clearly mentioned in their respective rulebooks.</p>
+    answer: <p>Dhyuthi is open to all undergraduate students from any college or university. Some specific pre-events may also be open to a specific branch, which will be clearly mentioned in their respective rulebooks.</p>
   },
   {
     id: 'faq-2',
@@ -42,7 +42,7 @@ function FAQs() {
   const faqsRef = useRef(null)
 
   useGSAP(() => {
-    gsap.fromTo('.accordion-item', 
+    gsap.fromTo('.accordion-item',
       { opacity: 0, y: 50 },
       {
         opacity: 1,

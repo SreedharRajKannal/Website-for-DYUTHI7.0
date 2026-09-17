@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { X } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -119,7 +120,7 @@ function TrackCard({ track, index }) {
       </article>
 
       {/* ── Detail Modal ─────────────────────────────────────── */}
-      {modalOpen && (
+      {modalOpen && createPortal(
         <div
           className="track-modal-overlay"
           onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}
@@ -183,7 +184,8 @@ function TrackCard({ track, index }) {
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
