@@ -48,22 +48,3 @@ npm run lint       # ESLint
 npm run format     # Prettier
 ```
 
-## Deployment (GitHub Pages)
-
-The project is pre-configured to deploy to:  
-**https://\<username\>.github.io/Website-for-DYUTHI7.0/**
-
-### Deploy in one command
-
-```bash
-npm run deploy
-```
-
-This will:
-
-1. Build the production bundle (`npm run predeploy` → `vite build`)
-2. Push the `dist/` folder to the `gh-pages` branch via the `gh-pages` package
-
-### First-time setup
-
-Make sure the GitHub repo's **Settings → Pages** source is set to the `gh-pages` branch.
