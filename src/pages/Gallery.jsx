@@ -62,15 +62,6 @@ function Gallery() {
       stagger: { amount: 0.5, from: "center" },
       ease: 'back.out(1.5)',
     })
-
-    // Pin Gallery at the top for the FAQ curtain reveal
-    ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: 'top top',
-      end: '+=1500', // Keep it pinned while FAQs scroll over
-      pin: true,
-      pinSpacing: false, // Ensures FAQs slide over rather than being pushed down
-    })
   }, { scope: containerRef })
 
   const openLightbox = (index) => setLightboxIndex(index)

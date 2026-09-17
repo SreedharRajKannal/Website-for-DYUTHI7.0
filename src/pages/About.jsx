@@ -37,69 +37,40 @@ const PRE_EVENTS = [
 function About() {
   useSEO('About', 'Learn more about Dhyuthi 7.0 and its pre-events.')
   const pinRef = useRef(null)
-  const introRef = useRef(null)
-  const cardsRef = useRef([])
+  const trackRef = useRef(null)
 
   useGSAP(() => {
-    const tl = gsap.timeline({
+    gsap.to(trackRef.current, {
+      x: () => -(trackRef.current.scrollWidth - window.innerWidth),
+      ease: 'none',
       scrollTrigger: {
         trigger: pinRef.current,
         start: 'top top',
-        end: '+=2500', // Duration of the pinned scroll
+        end: () => "+=" + trackRef.current.scrollWidth,
         scrub: 1,
         pin: true,
+        invalidateOnRefresh: true, // Recalculate on resize
       }
     })
-
-    // 1. Move the intro section out to the left
-    tl.to(introRef.current, { xPercent: -100, ease: 'none' }, 0)
-
-    // 2. Animate cards in from bottom right (y: 100vh, x: 50vw)
-    // and fan them out horizontally.
-    tl.fromTo(cardsRef.current,
-      { y: '100vh', x: '50vw', opacity: 0 },
-      { 
-        y: 0, 
-        x: (index) => index * 340, // 340px spacing between cards
-        opacity: 1,
-        stagger: 0.1, 
-        ease: 'power2.out',
-        duration: 1
-      },
-      0.1
-    )
-
-    // 3. Move them leftwards to simulate horizontal scrolling
-    tl.to(cardsRef.current, {
-      x: (index) => (index * 340) - 1200, // Move left by 1200px
-      ease: 'none',
-      duration: 2
-    }, 1.2)
-
   }, { scope: pinRef })
-
-  // Initialize refs array
-  const addToCardsRef = (el) => {
-    if (el && !cardsRef.current.includes(el)) {
-      cardsRef.current.push(el)
-    }
-  }
 
   return (
     <div className="about-pin-wrapper" id="about" ref={pinRef}>
-      {/* ── About Intro ────────────────────────────────────────── */}
-      <section className="about__intro" ref={introRef}>
-        <div className="about__logo-side">
-          <img
-            src={logo}
-            alt="Dhyuthi 7.0 logo"
-            className="about__logo"
-          />
-          <span className="about__logo-badge">IEEE SCT SB</span>
-        </div>
+      <div className="about-scroll-track" ref={trackRef}>
+        {/* ── About Intro ────────────────────────────────────────── */}
+        <section className="about__intro">
+          <div className="about__intro-inner">
+            <div className="about__logo-side">
+              <img
+                src={logo}
+                alt="Dhyuthi 7.0 logo"
+                className="about__logo"
+              />
+              <span className="about__logo-badge">IEEE SCT SB</span>
+            </div>
 
-        <div className="about__text-side">
-          <h1 className="about__heading">About Dhyuthi 7.0</h1>
+            <div className="about__text-side">
+              <h1 className="about__heading">About Dhyuthi 7.0</h1>
 
           {/*
            * ──────────────────────────────────────────────────────
@@ -132,37 +103,37 @@ function About() {
               create something extraordinary.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* ── Pre-Events Cards ────────────────────────────────── */}
-      <section className="about__pre-events-layer">
-        {PRE_EVENTS.map((event, index) => (
-          <article 
-            className="pre-event-card absolute-card" 
-            key={event.id}
-            ref={addToCardsRef}
-            style={{ zIndex: 10 + index }}
-          >
-            <div className="pre-event-card__poster">
-              <span className="pre-event-card__poster-label">
-                Poster coming soon
-              </span>
             </div>
+          </div>
+        </section>
 
-            <div className="pre-event-card__body">
-              <h3 className="pre-event-card__title">{event.title}</h3>
-              <p className="pre-event-card__blurb">{event.blurb}</p>
-              <a
-                href={event.registerLink}
-                className="pre-event-card__register"
-              >
-                Register
-              </a>
-            </div>
-          </article>
-        ))}
-      </section>
+        {/* ── Pre-Events Cards ────────────────────────────────── */}
+        <section className="about__pre-events-layer">
+          {PRE_EVENTS.map((event) => (
+            <article 
+              className="pre-event-card" 
+              key={event.id}
+            >
+              <div className="pre-event-card__poster">
+                <span className="pre-event-card__poster-label">
+                  Poster coming soon
+                </span>
+              </div>
+
+              <div className="pre-event-card__body">
+                <h3 className="pre-event-card__title">{event.title}</h3>
+                <p className="pre-event-card__blurb">{event.blurb}</p>
+                <a
+                  href={event.registerLink}
+                  className="pre-event-card__register"
+                >
+                  Register
+                </a>
+              </div>
+            </article>
+          ))}
+        </section>
+      </div>
     </div>
   )
 }

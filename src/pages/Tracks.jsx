@@ -12,72 +12,43 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
 function Tracks() {
   useSEO('Tracks', 'Explore the various tracks and competitions at Dhyuthi 7.0.')
   const pinRef = useRef(null)
-  const textRef = useRef(null)
-  const cardsRef = useRef([])
+  const trackRef = useRef(null)
 
   useGSAP(() => {
-    const tl = gsap.timeline({
+    gsap.to(trackRef.current, {
+      x: () => -(trackRef.current.scrollWidth - window.innerWidth),
+      ease: 'none',
       scrollTrigger: {
         trigger: pinRef.current,
         start: 'top top',
-        end: '+=2500', // Duration of the pinned scroll
+        end: () => "+=" + trackRef.current.scrollWidth,
         scrub: 1,
         pin: true,
+        invalidateOnRefresh: true, // Recalculate on resize
       }
     })
-
-    // 1. Move text out to the left
-    tl.to(textRef.current, { xPercent: -100, ease: 'none' }, 0)
-
-    // 2. Animate cards in from bottom right
-    tl.fromTo(cardsRef.current,
-      { y: '100vh', x: '50vw', opacity: 0 },
-      { 
-        y: 0, 
-        x: (index) => index * 360, // Space them out
-        opacity: 1,
-        stagger: 0.1, 
-        ease: 'power2.out',
-        duration: 1
-      },
-      0.1
-    )
-
-    // 3. Move them leftwards
-    tl.to(cardsRef.current, {
-      x: (index) => (index * 360) - 1500, // Move left
-      ease: 'none',
-      duration: 2
-    }, 1.2)
-
   }, { scope: pinRef })
-
-  const addToCardsRef = (el) => {
-    if (el && !cardsRef.current.includes(el)) {
-      cardsRef.current.push(el)
-    }
-  }
 
   return (
     <div className="tracks-pin-wrapper" id="tracks" ref={pinRef}>
-      <div className="tracks-text-side" ref={textRef}>
-        <h1 className="tracks-page__heading">Tracks</h1>
-        <p className="tracks-page__subtitle">
-          Four tracks. Endless possibilities. Pick your arena.
-        </p>
-      </div>
+      <div className="tracks-scroll-track" ref={trackRef}>
+        <div className="tracks-text-side">
+          <h1 className="tracks-page__heading">Tracks</h1>
+          <p className="tracks-page__subtitle">
+            Four tracks. Endless possibilities. Pick your arena.
+          </p>
+        </div>
 
-      <div className="tracks-cards-layer">
-        {tracks.map((track, i) => (
-          <div 
-            key={track.id} 
-            className="absolute-track-card"
-            ref={addToCardsRef}
-            style={{ zIndex: 10 + i }}
-          >
-            <TrackCard track={track} index={i} />
-          </div>
-        ))}
+        <div className="tracks-cards-layer">
+          {tracks.map((track, i) => (
+            <div 
+              key={track.id} 
+              className="track-card-wrapper"
+            >
+              <TrackCard track={track} index={i} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

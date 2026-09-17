@@ -6,26 +6,35 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  max-width: 100%;
   overflow: hidden;
-  background: var(--bg-default); /* Ensure background is solid for pinning */
+  background: var(--bg-default);
+}
+
+.about-scroll-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  height: 100vh;
+  will-change: transform;
 }
 
 /* ─── About Intro Section ───────────────────────────────────────────── */
 
 .about__intro {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1200px;
+  width: 100vw; /* Take full viewport width initially */
+  max-width: 100vw;
   padding: 0 var(--space-6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about__intro-inner {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-12);
   align-items: center;
-  will-change: transform;
+  max-width: 1200px;
 }
 
 .about__logo-side {
@@ -102,30 +111,17 @@
 /* ─── Pre-Events Layer ────────────────────────────────────────────── */
 
 .about__pre-events-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 0 var(--space-16); /* Give some padding after the intro text */
   height: 100vh;
-  pointer-events: none; /* Let clicks pass through empty space */
-}
-
-/* Pre-event card absolute positioning */
-.absolute-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 320px;
-  /* Use margin instead of transform translate to center it, 
-     because GSAP will animate transform x/y */
-  margin-top: -240px; 
-  margin-left: -160px;
-  pointer-events: auto;
-  will-change: transform;
 }
 
 /* Pre-event card */
 .pre-event-card {
+  width: 320px;
+  flex-shrink: 0;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
