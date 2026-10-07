@@ -13,8 +13,7 @@ React + Vite scaffold configured for deployment to GitHub Pages.
 ## 🚀 Live Demo
 
 Experience the interactive Dhyuthi 7.0 website and its TRIONN-inspired motion design here:  
-👉 [**Try it Live!**]([https://sreedharrajkannal.github.io/Website-for-DYUTHI7.0/](https://sreedharrajkannal.github.io/Website-for-DYUTHI7.0/)
-
+👉 [**Try it Live!**](https://sreedharrajkannal.github.io/Website-for-DYUTHI7.0/)
 ## Folder Structure
 
 ```
